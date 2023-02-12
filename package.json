@@ -11,10 +11,14 @@
     "test": "vitest"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.4.9",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
     "@remix-run/node": "^1.12.0",
     "@remix-run/react": "^1.12.0",
     "@remix-run/serve": "^1.12.0",
     "@vitejs/plugin-react": "^2.2.0",
+    "framer-motion": "^9.0.2",
     "isbot": "^3.6.5",
     "jsdom": "^21.1.0",
     "react": "^18.2.0",
