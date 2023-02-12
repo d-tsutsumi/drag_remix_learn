@@ -1,0 +1,40 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "scripts": {
+    "build": "remix build",
+    "dev": "remix dev",
+    "start": "remix-serve build",
+    "typecheck": "tsc",
+    "format": "prettier --check ./{app,tests}/**/*.{ts,tsx}",
+    "format-run": "npx prettier --write ./{app,tests}/**/*.{ts,tsx}",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@remix-run/node": "^1.12.0",
+    "@remix-run/react": "^1.12.0",
+    "@remix-run/serve": "^1.12.0",
+    "@vitejs/plugin-react": "^2.2.0",
+    "isbot": "^3.6.5",
+    "jsdom": "^21.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@remix-run/dev": "^1.12.0",
+    "@remix-run/eslint-config": "^1.12.0",
+    "@testing-library/dom": "^8.20.0",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^14.4.3",
+    "@types/react": "^18.0.25",
+    "@types/react-dom": "^18.0.8",
+    "eslint": "^8.27.0",
+    "prettier": "^2.8.4",
+    "typescript": "^4.8.4",
+    "vitest": "^0.28.4"
+  },
+  "engines": {
+    "node": ">=14"
+  }
+}
