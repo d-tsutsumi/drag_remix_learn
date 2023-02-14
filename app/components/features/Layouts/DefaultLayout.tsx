@@ -1,4 +1,4 @@
-import { Box, Container} from "@chakra-ui/react";
+import { Container } from "@chakra-ui/react";
 import type { FC, ReactNode } from "react";
 import { DefaultHeader } from "./DefaultHeader";
 
@@ -12,9 +12,7 @@ export const DefaultLayout: FC<Props> = ({ children }) => {
       <DefaultHeader />
       <main>
         <Container maxW="container.xl" centerContent>
-          <Box padding="4" color="black" maxW="lg">
-            {children}
-          </Box>
+          {children}
         </Container>
       </main>
     </>

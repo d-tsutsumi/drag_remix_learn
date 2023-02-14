@@ -1,6 +1,6 @@
 /* @jsxFrag React.Fragment */
 
-import { Box, Button, Flex, Heading, Stack, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Stack, Text } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { useContext } from "react";
 import { UiContext } from "../../../context/ui/uiContext";
@@ -40,9 +40,15 @@ export const DefaultHeader = () => {
           mt={{ base: 4, md: 0 }}
           pt="1"
         >
-          <Text pr={2} as="button">Tasks</Text>
-          <Text pr={2} as="button">Add Task</Text>
-          <Text pr={2} as="button">Done Task</Text>
+          <Text pr={2} as="button">
+            Tasks
+          </Text>
+          <Text pr={2} as="button">
+            Add Task
+          </Text>
+          <Text pr={2} as="button">
+            Done Task
+          </Text>
         </Stack>
       </Flex>
     </header>
