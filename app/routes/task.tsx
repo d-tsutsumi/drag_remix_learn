@@ -1,9 +1,10 @@
 import { DefaultLayout } from "~/features/Layouts";
+import { Outlet } from "@remix-run/react";
 
-export default function Index() {
+export default function Task() {
   return (
     <DefaultLayout>
-      <h1>Start Page</h1>
+      <Outlet />
     </DefaultLayout>
   );
 }
