@@ -1,4 +1,5 @@
-import type { TaskType } from "../lib/type";
+import type { FC, DragEvent } from "react";
+import { useContext } from "react";
 import {
   Card,
   CardHeader,
@@ -9,7 +10,9 @@ import {
   Box,
   Text,
 } from "@chakra-ui/react";
-import type { FC } from "react";
+
+import { UiContext } from "~/context/ui";
+import type { TaskType } from "../lib";
 
 type Props = {
   task: TaskType;
@@ -17,8 +20,23 @@ type Props = {
 
 export const TaskCard: FC<Props> = ({ task }) => {
   const { name, description, title } = task;
+  const { dragOff, dragOn } = useContext(UiContext);
+  const onDragStart = (event: DragEvent) => {
+    event.dataTransfer.setData("text", task.id);
+    dragOn();
+  };
+  const onDragEnd = () => {
+    dragOff();
+  };
+
   return (
-    <Card m={3} w="xs">
+    <Card
+      m={3}
+      w="xs"
+      draggable
+      onDragStart={onDragStart}
+      onDragEnd={onDragEnd}
+    >
       <CardHeader>
         <Heading size="md">{name}</Heading>
       </CardHeader>
