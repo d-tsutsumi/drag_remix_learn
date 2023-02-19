@@ -1,11 +1,7 @@
-import { TaskArea } from "~/features/Tasks"
-
-
+import { TaskContainer } from "~/features/Tasks";
 
 const TaskPage = () => {
-  return (
-    <TaskArea />
-  )
-}
+  return <TaskContainer />;
+};
 
-export default TaskPage
+export default TaskPage;

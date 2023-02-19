@@ -36,6 +36,7 @@ export const TaskCard: FC<Props> = ({ task }) => {
       draggable
       onDragStart={onDragStart}
       onDragEnd={onDragEnd}
+      cursor="pointer"
     >
       <CardHeader>
         <Heading size="md">{name}</Heading>

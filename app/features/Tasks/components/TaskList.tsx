@@ -1,4 +1,4 @@
-import type { FC, DragEvent } from "react";
+import type { FC, DragEvent, ReactNode } from "react";
 import { useMemo, useContext } from "react";
 import type { SystemStyleObject } from "@chakra-ui/react";
 import { Box } from "@chakra-ui/react";
@@ -11,9 +11,15 @@ type Props = {
   tasks: TaskType[];
   stauts: TaskState;
   updateTask: (taskId: string, state: TaskState) => void;
+  children?: ReactNode;
 };
 
-export const TaskList: FC<Props> = ({ tasks, stauts, updateTask }) => {
+export const TaskList: FC<Props> = ({
+  tasks,
+  stauts,
+  updateTask,
+  children,
+}) => {
   const { isDrag, dragOff } = useContext(UiContext);
   const statusTasks = useMemo(
     () => tasks.filter(({ state }) => state === stauts),
@@ -37,6 +43,7 @@ export const TaskList: FC<Props> = ({ tasks, stauts, updateTask }) => {
       sx={isDrag ? DragStyle : offDragStyle}
       w="360px"
     >
+      {children}
       {statusTasks.map((task) => (
         <TaskCard task={task} key={task.id} />
       ))}
