@@ -1,16 +1,16 @@
-import { Box, Flex, FormControl, Stack } from "@chakra-ui/react";
-import { TaskList } from "./components";
-
-import { Tasks } from "./lib/mock";
 import { useState } from "react";
+
+import { Flex } from "@chakra-ui/react";
+import { TaskList, NewTask } from "./components";
+import type { NewTaskProps } from "./components";
+import { Tasks } from "./lib/mock";
 import type { TaskState } from "./lib";
-import { PrimariyButton, TextInput } from "../shared";
 
 export const TaskContainer = () => {
   const [allTasks, setAllTasks] = useState(Tasks);
   const [isAddingTask, setIsAddingTask] = useState(false);
   const [title, setTitle] = useState("");
-  const [description, setDiscription] = useState("");
+  const [description, setDescription] = useState("");
 
   const updateTask = (taskId: string, state: TaskState) => {
     const update = allTasks.find((task) => task.id === taskId);
@@ -18,18 +18,12 @@ export const TaskContainer = () => {
     if (!update) return;
     setAllTasks([...imutableTaskList, { ...update, state: state }]);
   };
-  const ontitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTitle(e.target.value);
-  };
-  const onDescriptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDiscription(e.target.value);
-  };
   const openAddTaskForm = () => {
     setIsAddingTask(true);
   };
   const closeAddTaskForm = () => {
     setTitle("");
-    setDiscription("");
+    setDescription("");
     setIsAddingTask(false);
   };
 
@@ -49,6 +43,17 @@ export const TaskContainer = () => {
     closeAddTaskForm();
   };
 
+  const newTaskProps: NewTaskProps = {
+    setTitle,
+    setDescription,
+    closeAddTaskForm,
+    onSubmitHandle: addTask,
+    openAddTaskForm,
+    isAddingTask,
+    description,
+    title,
+  };
+
   return (
     <Flex
       color={"white"}
@@ -59,35 +64,7 @@ export const TaskContainer = () => {
       mt={2}
     >
       <TaskList tasks={allTasks} stauts="pendding" updateTask={updateTask}>
-        <Box p={2} bg="white" borderRadius={4}>
-          {isAddingTask ? (
-            <FormControl p={2} as={"form"} onSubmit={addTask}>
-              <TextInput
-                label={"Title"}
-                value={title}
-                onChangeHandle={ontitleChange}
-              />
-              <TextInput
-                label={"description"}
-                value={description}
-                onChangeHandle={onDescriptionChange}
-              />
-              <Stack spacing={2} direction={"row"} align="center" p={1} mt={2}>
-                <PrimariyButton
-                  text="cancel"
-                  onClickHandle={closeAddTaskForm}
-                />
-                <PrimariyButton text="add" type="submit" />
-              </Stack>
-            </FormControl>
-          ) : (
-            <PrimariyButton
-              text="add task"
-              width="full"
-              onClickHandle={openAddTaskForm}
-            />
-          )}
-        </Box>
+        <NewTask {...newTaskProps} />
       </TaskList>
       <TaskList tasks={allTasks} stauts="progress" updateTask={updateTask} />
       <TaskList tasks={allTasks} stauts="done" updateTask={updateTask} />
