@@ -1,22 +1,25 @@
 import { useState } from "react";
+import type { FC } from "react";
 
 import { Flex } from "@chakra-ui/react";
 import { TaskList, NewTask } from "./components";
 import type { NewTaskProps } from "./components";
-import { Tasks } from "./lib/mock";
-import type { TaskState } from "./lib";
+import type { TaskDoingState, TaskType } from "./lib";
 
-export const TaskContainer = () => {
-  const [allTasks, setAllTasks] = useState(Tasks);
+type Props = {
+  taskList: TaskType[];
+};
+
+export const TaskContainer: FC<Props> = ({ taskList }) => {
+  const [alltaskList, setAlltaskList] = useState(taskList);
   const [isAddingTask, setIsAddingTask] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-
-  const updateTask = (taskId: string, state: TaskState) => {
-    const update = allTasks.find((task) => task.id === taskId);
-    const imutableTaskList = allTasks.filter(({ id }) => taskId !== id);
+  const updateTask = (taskId: string, state: TaskDoingState) => {
+    const update = alltaskList.find((task) => task.id === taskId);
+    const imutableTaskList = alltaskList.filter(({ id }) => taskId !== id);
     if (!update) return;
-    setAllTasks([...imutableTaskList, { ...update, state: state }]);
+    setAlltaskList([...imutableTaskList, { ...update, state: state }]);
   };
   const openAddTaskForm = () => {
     setIsAddingTask(true);
@@ -30,7 +33,7 @@ export const TaskContainer = () => {
   const addTask = (e: React.FormEvent<HTMLDivElement>) => {
     e.preventDefault();
     if (!title || !description) return;
-    setAllTasks((prevTask) => [
+    setAlltaskList((prevTask) => [
       ...prevTask,
       {
         title,
@@ -63,11 +66,11 @@ export const TaskContainer = () => {
       gap={5}
       mt={2}
     >
-      <TaskList tasks={allTasks} stauts="pendding" updateTask={updateTask}>
+      <TaskList tasks={alltaskList} stauts="pendding" updateTask={updateTask}>
         <NewTask {...newTaskProps} />
       </TaskList>
-      <TaskList tasks={allTasks} stauts="progress" updateTask={updateTask} />
-      <TaskList tasks={allTasks} stauts="done" updateTask={updateTask} />
+      <TaskList tasks={alltaskList} stauts="progress" updateTask={updateTask} />
+      <TaskList tasks={alltaskList} stauts="done" updateTask={updateTask} />
     </Flex>
   );
 };

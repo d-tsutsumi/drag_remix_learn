@@ -4,13 +4,13 @@ import type { SystemStyleObject } from "@chakra-ui/react";
 import { Box } from "@chakra-ui/react";
 
 import { TaskCard } from "./TaskCard";
-import type { TaskState, TaskType } from "../lib";
+import type { TaskDoingState, TaskType } from "../lib";
 import { UiContext } from "../../../context/ui/uiContext";
 
 type Props = {
   tasks: TaskType[];
-  stauts: TaskState;
-  updateTask: (taskId: string, state: TaskState) => void;
+  stauts: TaskDoingState;
+  updateTask: (taskId: string, state: TaskDoingState) => void;
   children?: ReactNode;
 };
 
