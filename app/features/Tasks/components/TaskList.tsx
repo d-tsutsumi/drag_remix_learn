@@ -10,7 +10,7 @@ import { UiContext } from "../../../context/ui/uiContext";
 type Props = {
   tasks: TaskType[];
   stauts: TaskDoingState;
-  updateTask: (taskId: string, state: TaskDoingState) => void;
+  updateTask: (taskId: number, state: TaskDoingState) => void;
   children?: ReactNode;
 };
 
@@ -26,7 +26,7 @@ export const TaskList: FC<Props> = ({
     [stauts, tasks]
   );
   const onDrop = (event: DragEvent) => {
-    const id = event.dataTransfer.getData("text");
+    const id = Number(event.dataTransfer.getData("text"));
     updateTask(id, stauts);
     dragOff();
   };

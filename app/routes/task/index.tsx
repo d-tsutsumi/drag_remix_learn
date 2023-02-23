@@ -1,22 +1,33 @@
-import { json } from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
 
 import type { ActionArgs, LoaderArgs } from "@remix-run/node";
 import { TaskContainer } from "~/features/Tasks";
 import { useLoaderData } from "@remix-run/react";
 import { db } from "~/db/db.server";
+import taskRequest from "~/features/Tasks/lib/task.server";
 
 export async function loader(args: LoaderArgs) {
   const tasks = await db.task.findMany();
   return json(tasks);
 }
 
-// TODO formでのtask追加は全てserverでやる。
+// TODO error処理
 export async function action({ request }: ActionArgs) {
   if (request.method === "POST") {
-    console.log(request);
-    const body = await request.formData();
-    console.log(body.get("title"));
-    return null;
+    try {
+      await taskRequest.post(request);
+      return redirect("/task");
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  if (request.method === "PATCH") {
+    try {
+      await taskRequest.patch(request);
+      return redirect("/task");
+    } catch (e) {
+      console.log(e);
+    }
   }
 }
 
