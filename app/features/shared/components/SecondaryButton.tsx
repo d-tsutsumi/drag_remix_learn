@@ -10,7 +10,7 @@ type Props = {
   color?: string
 };
 
-export const PrimariyButton: FC<Props> = ({
+export const SecondaryButton: FC<Props> = ({
   width = "md",
   type = "button",
   text,
@@ -19,7 +19,7 @@ export const PrimariyButton: FC<Props> = ({
 }) => {
   return (
     <Button
-      bg={"pink.300"}
+      bg={"green.300"}
       w={width}
       onClick={onClickHandle}
       type={type}

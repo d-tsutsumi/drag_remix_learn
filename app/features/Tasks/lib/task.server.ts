@@ -55,7 +55,44 @@ const patch = async (request: Request) => {
   });
 };
 
+const put = async (request: Request, id: number) => {
+  const body = await request.formData();
+  const state = body.get("state");
+  const title = body.get("title");
+  const description = body.get("description");
+  // TODO valid
+  if (
+    typeof state !== "string" ||
+    typeof title !== "string" ||
+    typeof description !== "string" ||
+    !isState(state)
+  ) {
+    throw new Error("Form not submitted correctly.");
+  }
+
+  const task = await db.task.findUnique({
+    where: {
+      id,
+    },
+  });
+  if (!task) {
+    throw new Error("task is not found");
+  }
+
+  await db.task.update({
+    where: {
+      id,
+    },
+    data: {
+      state,
+      title,
+      description,
+    },
+  });
+};
+
 export default {
   post,
   patch,
+  put,
 };
